@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import { Button } from '@/components/ui/button';
@@ -22,6 +23,7 @@ import {
 } from 'lucide-react';
 
 const Index = () => {
+  const [showVideo, setShowVideo] = useState(false);
   const stats = [
     { icon: Users, label: 'Students', value: '50K+' },
     { icon: BookOpen, label: 'Courses', value: '25+' },
@@ -136,10 +138,38 @@ const Index = () => {
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </NavLink>
-            <Button variant="outline" size="lg" className="text-lg px-8 py-6">
-              <Play className="mr-2 h-5 w-5" />
-              Watch Demo
-            </Button>
+            <div className="relative">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="text-lg px-8 py-6"
+                onMouseEnter={() => setShowVideo(true)}
+                onMouseLeave={() => setShowVideo(false)}
+              >
+                <Play className="mr-2 h-5 w-5" />
+                Watch Demo
+              </Button>
+              
+              {/* Video Overlay */}
+              {showVideo && (
+                <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-4 z-50 bg-black rounded-lg overflow-hidden shadow-2xl border border-border/50">
+                  <iframe
+                    width="400"
+                    height="225"
+                    src="https://www.youtube.com/embed/r9Y35xwNPiI?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0"
+                    title="Harkirat Singh Coding Demo"
+                    frameBorder="0"
+                    allow="autoplay; encrypted-media"
+                    allowFullScreen
+                    className="block"
+                  />
+                  <div className="p-3 bg-background">
+                    <p className="text-sm font-medium">Live Coding a Gambling Strategy</p>
+                    <p className="text-xs text-muted-foreground">by Harkirat Singh</p>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
           
           {/* Stats */}
