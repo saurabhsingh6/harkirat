@@ -118,7 +118,7 @@ const Index = () => {
             </Badge>
           </div>
           
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight animate-fade-in hover:scale-105 transition-transform duration-300">
             <span className="bg-gradient-hero bg-clip-text text-transparent">
               Master Programming
             </span>
@@ -126,7 +126,7 @@ const Index = () => {
             <span className="text-foreground">Build Your Career</span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed animate-slide-up">
             Learn full-stack development, system design, and get job-ready with hands-on projects. 
             Taught by industry experts who've been there.
           </p>
@@ -175,8 +175,8 @@ const Index = () => {
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <stat.icon className="h-8 w-8 mx-auto mb-2 text-brand-primary" />
+              <div key={index} className="text-center animate-scale-in hover:scale-110 transition-transform duration-300">
+                <stat.icon className="h-8 w-8 mx-auto mb-2 text-brand-primary hover:text-brand-secondary transition-colors duration-300" />
                 <div className="text-2xl md:text-3xl font-bold text-brand-primary mb-1">
                   {stat.value}
                 </div>
