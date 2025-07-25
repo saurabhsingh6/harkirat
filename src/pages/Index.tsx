@@ -5,6 +5,11 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
+import ParticleBackground from '@/components/ParticleBackground';
+import MagneticButton from '@/components/MagneticButton';
+import GlassmorphismCard from '@/components/GlassmorphismCard';
+import ScrollAnimationWrapper from '@/components/ScrollAnimationWrapper';
+import InteractiveCursor from '@/components/InteractiveCursor';
 import { 
   ArrowRight, 
   Play, 
@@ -19,7 +24,10 @@ import {
   Github,
   Twitter,
   Youtube,
-  ExternalLink
+  ExternalLink,
+  Sparkles,
+  Rocket,
+  Brain
 } from 'lucide-react';
 
 const Index = () => {
@@ -106,118 +114,161 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      <InteractiveCursor />
+      <ParticleBackground />
+      <div className="absolute inset-0 bg-gradient-mesh opacity-30" />
+      <div className="relative z-10">
+        <Navbar />
       
-      {/* Hero Section */}
-      <section className="pt-24 pb-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto text-center">
-          <div className="mb-8">
-            <Badge className="mb-6 px-4 py-2 bg-brand-primary/10 text-brand-primary border-brand-primary/20">
-              🚀 Join 50K+ developers already building their careers
-            </Badge>
-          </div>
+        {/* Hero Section */}
+        <section className="pt-24 pb-20 px-4 sm:px-6 lg:px-8 relative">
+          <div className="max-w-7xl mx-auto text-center">
+            <ScrollAnimationWrapper animation="fadeIn" delay={200}>
+              <div className="mb-8">
+                <MagneticButton>
+                  <Badge className="mb-6 px-6 py-3 bg-gradient-aurora text-black border-white/30 backdrop-blur-sm animate-pulse-glow">
+                    <Sparkles className="w-4 h-4 mr-2" />
+                    🚀 Join 50K+ developers already building their careers
+                  </Badge>
+                </MagneticButton>
+              </div>
+            </ScrollAnimationWrapper>
           
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight animate-fade-in hover:scale-105 transition-transform duration-300">
-            <span className="bg-gradient-hero bg-clip-text text-transparent">
-              Master Programming
-            </span>
-            <br />
-            <span className="text-foreground">Build Your Career</span>
-          </h1>
+            <ScrollAnimationWrapper animation="slideUp" delay={400}>
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight relative">
+                <div className="absolute inset-0 bg-gradient-primary bg-clip-text text-transparent blur-sm animate-pulse-glow" />
+                <span className="relative bg-gradient-hero bg-clip-text text-transparent animate-float">
+                  Master Programming
+                </span>
+                <br />
+                <span className="relative text-foreground animate-shimmer bg-gradient-to-r from-foreground via-white to-foreground bg-clip-text bg-[length:200%_100%]">
+                  Build Your Career
+                </span>
+              </h1>
+            </ScrollAnimationWrapper>
           
-          <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed animate-slide-up">
-            Learn full-stack development, system design, and get job-ready with hands-on projects. 
-            Taught by industry experts who've been there.
-          </p>
+            <ScrollAnimationWrapper animation="slideUp" delay={600}>
+              <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
+                Learn full-stack development, system design, and get job-ready with hands-on projects. 
+                Taught by industry experts who've been there.
+              </p>
+            </ScrollAnimationWrapper>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <NavLink to="/products">
-              <Button size="lg" className="text-lg px-8 py-6 bg-gradient-primary shadow-glow">
-                Start Learning
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </NavLink>
-            <div className="relative">
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="text-lg px-8 py-6"
-                onMouseEnter={() => setShowVideo(true)}
-                onMouseLeave={() => setShowVideo(false)}
-              >
-                <Play className="mr-2 h-5 w-5" />
-                Watch Demo
-              </Button>
+            <ScrollAnimationWrapper animation="scaleIn" delay={800}>
+              <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
+                <MagneticButton magnetStrength={0.2}>
+                  <NavLink to="/products">
+                    <Button size="lg" className="text-lg px-8 py-6 bg-gradient-primary shadow-dramatic hover:shadow-glow transition-all duration-500 group relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                      <Rocket className="mr-2 h-5 w-5 group-hover:animate-bounce" />
+                      Start Learning
+                      <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </NavLink>
+                </MagneticButton>
+                <div className="relative">
+                  <MagneticButton magnetStrength={0.15}>
+                    <GlassmorphismCard intensity="medium" className="p-0">
+                      <Button 
+                        variant="ghost" 
+                        size="lg" 
+                        className="text-lg px-8 py-6 bg-transparent hover:bg-white/10 border-0"
+                        onMouseEnter={() => setShowVideo(true)}
+                        onMouseLeave={() => setShowVideo(false)}
+                      >
+                        <Play className="mr-2 h-5 w-5" />
+                        Watch Demo
+                      </Button>
+                    </GlassmorphismCard>
+                  </MagneticButton>
               
-              {/* Video Overlay */}
-              {showVideo && (
-                <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-4 z-50 bg-black rounded-lg overflow-hidden shadow-2xl border border-border/50">
-                  <iframe
-                    width="400"
-                    height="225"
-                    src="https://www.youtube.com/embed/r9Y35xwNPiI?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0"
-                    title="Harkirat Singh Coding Demo"
-                    frameBorder="0"
-                    allow="autoplay; encrypted-media"
-                    allowFullScreen
-                    className="block"
-                  />
-                  <div className="p-3 bg-background">
-                    <p className="text-sm font-medium">Live Coding a Gambling Strategy</p>
-                    <p className="text-xs text-muted-foreground">by Harkirat Singh</p>
-                  </div>
+                  {/* Video Overlay */}
+                  {showVideo && (
+                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-4 z-50 animate-scale-in">
+                      <GlassmorphismCard intensity="strong" className="overflow-hidden shadow-dramatic">
+                        <iframe
+                          width="400"
+                          height="225"
+                          src="https://www.youtube.com/embed/r9Y35xwNPiI?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0"
+                          title="Harkirat Singh Coding Demo"
+                          frameBorder="0"
+                          allow="autoplay; encrypted-media"
+                          allowFullScreen
+                          className="block"
+                        />
+                        <div className="p-3 backdrop-blur-md">
+                          <p className="text-sm font-medium text-white">Live Coding a Gambling Strategy</p>
+                          <p className="text-xs text-white/70">by Harkirat Singh</p>
+                        </div>
+                      </GlassmorphismCard>
+                    </div>
+                  )}
                 </div>
-              )}
+              </div>
+            </ScrollAnimationWrapper>
+          
+            {/* Stats */}
+            <ScrollAnimationWrapper animation="slideUp" delay={1000}>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto">
+                {stats.map((stat, index) => (
+                  <MagneticButton key={index} magnetStrength={0.1}>
+                    <GlassmorphismCard intensity="light" className="text-center p-6 group hover:scale-110 transition-all duration-500 cursor-pointer">
+                      <div className="relative">
+                        <stat.icon className="h-10 w-10 mx-auto mb-3 text-brand-primary group-hover:animate-float animate-morph" />
+                        <div className="absolute inset-0 bg-gradient-primary rounded-full blur-lg opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
+                      </div>
+                      <div className="text-2xl md:text-3xl font-bold text-brand-primary mb-1 group-hover:text-white transition-colors">
+                        {stat.value}
+                      </div>
+                      <div className="text-sm text-muted-foreground group-hover:text-white/80 transition-colors">{stat.label}</div>
+                    </GlassmorphismCard>
+                  </MagneticButton>
+                ))}
+              </div>
+            </ScrollAnimationWrapper>
+          </div>
+        </section>
+
+        {/* Features Section */}
+        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30 relative">
+          <div className="absolute inset-0 bg-gradient-aurora opacity-50" />
+          <div className="max-w-7xl mx-auto relative z-10">
+            <ScrollAnimationWrapper animation="fadeIn" delay={200}>
+              <div className="text-center mb-16">
+                <h2 className="text-3xl md:text-5xl font-bold mb-6">
+                  Why Choose <span className="bg-gradient-primary bg-clip-text text-transparent animate-shimmer bg-[length:200%_100%]">100xDevs</span>?
+                </h2>
+                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                  We focus on practical skills that actually matter in the real world.
+                </p>
+              </div>
+            </ScrollAnimationWrapper>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {features.map((feature, index) => (
+                <ScrollAnimationWrapper key={index} animation="slideUp" delay={300 + index * 100}>
+                  <MagneticButton magnetStrength={0.1}>
+                    <GlassmorphismCard intensity="medium" className="text-center h-full group hover:scale-105 transition-all duration-500 cursor-pointer">
+                      <div className="p-6">
+                        <div className="relative mb-6">
+                          <div className="p-4 rounded-full bg-gradient-primary/20 w-fit mx-auto mb-4 group-hover:bg-gradient-primary/30 transition-all duration-500">
+                            <feature.icon className="h-8 w-8 text-brand-primary group-hover:animate-pulse-glow" />
+                          </div>
+                          <div className="absolute inset-0 bg-gradient-primary rounded-full blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
+                        </div>
+                        <h3 className="text-xl font-bold mb-4 group-hover:text-white transition-colors">{feature.title}</h3>
+                        <p className="text-muted-foreground leading-relaxed group-hover:text-white/80 transition-colors">
+                          {feature.description}
+                        </p>
+                      </div>
+                    </GlassmorphismCard>
+                  </MagneticButton>
+                </ScrollAnimationWrapper>
+              ))}
             </div>
           </div>
-          
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center animate-scale-in hover:scale-110 transition-transform duration-300">
-                <stat.icon className="h-8 w-8 mx-auto mb-2 text-brand-primary hover:text-brand-secondary transition-colors duration-300" />
-                <div className="text-2xl md:text-3xl font-bold text-brand-primary mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">
-              Why Choose <span className="bg-gradient-primary bg-clip-text text-transparent">100xDevs</span>?
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              We focus on practical skills that actually matter in the real world.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature, index) => (
-              <Card key={index} className="text-center bg-gradient-card border-border/50 hover:shadow-glow transition-all duration-300">
-                <CardHeader>
-                  <div className="p-3 rounded-full bg-brand-primary/10 w-fit mx-auto mb-4">
-                    <feature.icon className="h-8 w-8 text-brand-primary" />
-                  </div>
-                  <CardTitle className="text-xl">{feature.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground leading-relaxed">
-                    {feature.description}
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
 
       {/* Featured Courses */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
@@ -438,6 +489,7 @@ const Index = () => {
           </div>
         </div>
       </footer>
+      </div>
     </div>
   );
 };
