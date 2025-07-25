@@ -186,7 +186,7 @@ const Products = () => {
                 
                 <CardHeader>
                   <div className="flex items-center justify-between mb-2">
-                    <Badge variant="outline" className="text-xs">
+                    <Badge variant="outline" className="text-xs dark:text-black">
                       {product.level}
                     </Badge>
                     <div className="flex items-center gap-1">
@@ -226,7 +226,7 @@ const Products = () => {
                       )}
                     </div>
                     <NavLink to={`/products/${product.id}`}>
-                      <Button size="sm" className="group/btn">
+                      <Button size="sm" className="group/btn bg-white text-black">
                         View Details
                         <ArrowRight className="h-4 w-4 ml-1 group-hover/btn:translate-x-1 transition-transform" />
                       </Button>
@@ -240,7 +240,7 @@ const Products = () => {
           {/* CTA Section */}
           <div className="mt-20 text-center">
             <div className="bg-gradient-card rounded-2xl p-12 border border-border/50">
-              <h2 className="text-3xl font-bold mb-4">
+              <h2 className="text-3xl font-bold mb-4 text-neutral-900">
                 Can't find what you're looking for?
               </h2>
               <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
@@ -248,7 +248,7 @@ const Products = () => {
                 We're constantly adding new courses based on industry demands.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-gradient-primary">
+                <Button size="lg" className="bg-white text-black">
                   Join Community
                 </Button>
                 <Button variant="outline" size="lg">

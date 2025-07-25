@@ -234,7 +234,7 @@ const ProductDetail = () => {
                   </CardHeader>
                   
                   <CardContent className="space-y-4">
-                    <Button size="lg" className="w-full bg-gradient-primary">
+                    <Button size="lg" variant="no-hover" className="w-full">
                       Enroll Now
                     </Button>
                     

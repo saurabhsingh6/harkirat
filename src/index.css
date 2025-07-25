@@ -7,43 +7,43 @@ All colors MUST be HSL.
 */
 
 @layer base {
-:root {
+  :root {
     --background: 0 0% 100%;
-    --foreground: 0 0% 9%;
+    --foreground: 0 0% 0%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 9%;
+    --card-foreground: 0 0% 0%; 
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 9%;
+    --popover-foreground: 0 0% 0%; 
 
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 9%;
+    --secondary-foreground: 0 0% 0%; 
 
     --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
+    --muted-foreground: 0 0% 20%;
 
     --accent: 0 0% 96%;
-    --accent-foreground: 0 0% 9%;
+    --accent-foreground: 0 0% 0%; 
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 0 0% 90%;
     --input: 0 0% 90%;
-    --ring: 0 0% 9%;
+    --ring: 0 0% 0%; 
 
     /* Brand Colors */
-    --brand-primary: 0 0% 9%;
+    --brand-primary: 0 0% 0%;
     --brand-secondary: 0 0% 20%;
     --brand-accent: 0 0% 50%;
     
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(0 0% 9%), hsl(0 0% 20%));
-    --gradient-hero: linear-gradient(135deg, hsl(0 0% 98%) 0%, hsl(0 0% 96%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(0 0% 0%), hsl(0 0% 20%));
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(0 0% 98%) 100%);
     --gradient-card: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(0 0% 98%) 100%);
     --gradient-mesh: radial-gradient(circle at 20% 80%, hsla(0, 0%, 100%, 0.15) 0%, transparent 50%), 
                      radial-gradient(circle at 80% 20%, hsla(0, 0%, 100%, 0.15) 0%, transparent 50%),
@@ -58,21 +58,15 @@ All colors MUST be HSL.
 
     --radius: 0.5rem;
 
+    /* Sidebar */
     --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
+    --sidebar-foreground: 0 0% 0%;
+    --sidebar-primary: 0 0% 0%;
+    --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
+    --sidebar-accent-foreground: 0 0% 0%;
     --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 0 0% 0%;
   }
 
   .dark {
@@ -112,6 +106,64 @@ All colors MUST be HSL.
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+}
+
+:root:not(.dark) {
+  color-scheme: light;
+}
+
+:root:not(.dark) * {
+  color: hsl(var(--foreground)) !important;
+}
+
+:root:not(.dark) .text-muted-foreground {
+  color: hsl(0 0% 40%) !important;
+}
+
+:root:not(.dark) .text-card-foreground {
+  color: hsl(var(--foreground)) !important;
+}
+
+:root:not(.dark) .text-primary {
+  color: hsl(var(--primary)) !important;
+}
+
+:root:not(.dark) .text-secondary-foreground {
+  color: hsl(var(--foreground)) !important;
+}
+
+:root:not(.dark) .hover\:text-white:hover {
+  color: hsl(var(--foreground)) !important;
+}
+
+:root:not(.dark) .hero-text,
+:root:not(.dark) .hero-description {
+  color: hsl(var(--foreground)) !important;
+}
+
+:root:not(.dark) .btn-text {
+  color: hsl(var(--foreground)) !important;
+}
+
+:root:not(.dark) .course-card,
+:root:not(.dark) .course-card * {
+  color: hsl(var(--foreground)) !important;
+}
+
+:root:not(.dark) {
+  --text-opacity: 1;
+  color: rgba(0, 0, 0, var(--text-opacity)) !important;
+}
+
+:root:not(.dark) * {
+  --tw-text-opacity: 1;
+  color: rgba(0, 0, 0, var(--tw-text-opacity)) !important;
+}
+
+:root:not(.dark) .text-white,
+:root:not(.dark) .text-white\/80,
+:root:not(.dark) .text-white\/60 {
+  color: hsl(var(--foreground)) !important;
 }
 
 @layer base {

@@ -18,17 +18,54 @@ import {
   CheckCircle,
   ArrowLeft
 } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+  const [registerName, setRegisterName] = useState('');
+  const [registerEmail, setRegisterEmail] = useState('');
+  const [registerPassword, setRegisterPassword] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!loginEmail || !loginPassword) {
+      toast({
+        title: 'Missing Fields',
+        description: 'Please enter both email and password.',
+        variant: 'destructive',
+      });
+      return;
+    }
     setIsLoading(true);
-    // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
+      toast({
+        title: 'Login Successful',
+        description: 'Welcome back!',
+      });
+    }, 2000);
+  };
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!registerName || !registerEmail || !registerPassword) {
+      toast({
+        title: 'Missing Fields',
+        description: 'Please fill in all fields.',
+        variant: 'destructive',
+      });
+      return;
+    }
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      toast({
+        title: 'Account Created',
+        description: 'Your account has been created successfully.',
+      });
     }, 2000);
   };
 
@@ -131,7 +168,7 @@ const Auth = () => {
                     </TabsList>
                     
                     <TabsContent value="login" className="space-y-4">
-                      <form onSubmit={handleSubmit} className="space-y-4">
+                      <form onSubmit={handleLogin} className="space-y-4">
                         <div className="space-y-2">
                           <Label htmlFor="email">Email</Label>
                           <div className="relative">
@@ -142,10 +179,11 @@ const Auth = () => {
                               placeholder="your.email@example.com"
                               className="pl-10"
                               required
+                              value={loginEmail}
+                              onChange={e => setLoginEmail(e.target.value)}
                             />
                           </div>
                         </div>
-                        
                         <div className="space-y-2">
                           <Label htmlFor="password">Password</Label>
                           <div className="relative">
@@ -156,6 +194,8 @@ const Auth = () => {
                               placeholder="Enter your password"
                               className="pl-10 pr-10"
                               required
+                              value={loginPassword}
+                              onChange={e => setLoginPassword(e.target.value)}
                             />
                             <Button
                               type="button"
@@ -172,7 +212,6 @@ const Auth = () => {
                             </Button>
                           </div>
                         </div>
-                        
                         <div className="flex items-center justify-between text-sm">
                           <label className="flex items-center gap-2 cursor-pointer">
                             <input type="checkbox" className="rounded border-border" />
@@ -182,7 +221,6 @@ const Auth = () => {
                             Forgot password?
                           </a>
                         </div>
-                        
                         <Button 
                           type="submit" 
                           className="w-full bg-gradient-primary" 
@@ -192,9 +230,8 @@ const Auth = () => {
                         </Button>
                       </form>
                     </TabsContent>
-                    
                     <TabsContent value="register" className="space-y-4">
-                      <form onSubmit={handleSubmit} className="space-y-4">
+                      <form onSubmit={handleRegister} className="space-y-4">
                         <div className="space-y-2">
                           <Label htmlFor="name">Full Name</Label>
                           <div className="relative">
@@ -205,10 +242,11 @@ const Auth = () => {
                               placeholder="Your full name"
                               className="pl-10"
                               required
+                              value={registerName}
+                              onChange={e => setRegisterName(e.target.value)}
                             />
                           </div>
                         </div>
-                        
                         <div className="space-y-2">
                           <Label htmlFor="register-email">Email</Label>
                           <div className="relative">
@@ -219,10 +257,11 @@ const Auth = () => {
                               placeholder="your.email@example.com"
                               className="pl-10"
                               required
+                              value={registerEmail}
+                              onChange={e => setRegisterEmail(e.target.value)}
                             />
                           </div>
                         </div>
-                        
                         <div className="space-y-2">
                           <Label htmlFor="register-password">Password</Label>
                           <div className="relative">
@@ -233,6 +272,8 @@ const Auth = () => {
                               placeholder="Create a strong password"
                               className="pl-10 pr-10"
                               required
+                              value={registerPassword}
+                              onChange={e => setRegisterPassword(e.target.value)}
                             />
                             <Button
                               type="button"
@@ -249,7 +290,6 @@ const Auth = () => {
                             </Button>
                           </div>
                         </div>
-                        
                         <div className="flex items-start gap-2 text-sm">
                           <input type="checkbox" className="rounded border-border mt-1" required />
                           <span className="text-muted-foreground">
@@ -263,7 +303,6 @@ const Auth = () => {
                             </a>
                           </span>
                         </div>
-                        
                         <Button 
                           type="submit" 
                           className="w-full bg-gradient-primary" 

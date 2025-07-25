@@ -10,6 +10,7 @@ import MagneticButton from '@/components/MagneticButton';
 import GlassmorphismCard from '@/components/GlassmorphismCard';
 import ScrollAnimationWrapper from '@/components/ScrollAnimationWrapper';
 import InteractiveCursor from '@/components/InteractiveCursor';
+import { EnhancedCourseCard } from '@/components/EnhancedCourseCard';
 import { 
   ArrowRight, 
   Play, 
@@ -29,9 +30,11 @@ import {
   Rocket,
   Brain
 } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 const Index = () => {
   const [showVideo, setShowVideo] = useState(false);
+  const { toast } = useToast();
   const stats = [
     { icon: Users, label: 'Students', value: '50K+' },
     { icon: BookOpen, label: 'Courses', value: '25+' },
@@ -89,32 +92,91 @@ const Index = () => {
   const courses = [
     {
       title: '100xDevs Cohort 3.0',
-      description: 'Complete full-stack development program',
+      description: 'Complete full-stack development program with hands-on projects and mentorship',
       price: '₹6,999',
       originalPrice: '₹12,999',
       students: '2.5K+',
       rating: 4.9,
-      popular: true
+      popular: true,
+      duration: '24 weeks',
+      level: 'Advanced',
+      skills: ['React', 'Node.js', 'TypeScript', 'PostgreSQL', 'Docker', 'AWS']
     },
     {
       title: 'System Design Masterclass',
-      description: 'Advanced system design for interviews',
+      description: 'Master system design interviews with real-world architecture patterns',
       price: '₹2,999',
       originalPrice: '₹4,999',
       students: '1.8K+',
-      rating: 4.8
+      rating: 4.8,
+      duration: '8 weeks',
+      level: 'Advanced',
+      skills: ['System Design', 'Distributed Systems', 'Microservices', 'Scalability']
     },
     {
       title: 'DSA Problem Solving',
-      description: 'Master algorithms and data structures',
+      description: 'Ace coding interviews with comprehensive data structures and algorithms training',
       price: '₹1,999',
       students: '3.2K+',
-      rating: 4.7
+      rating: 4.7,
+      duration: '12 weeks',
+      level: 'Intermediate',
+      skills: ['Algorithms', 'Data Structures', 'Problem Solving', 'Big O']
+    },
+    {
+      title: 'Frontend Development',
+      description: 'Build modern web applications with React, Next.js, and modern tooling',
+      price: '₹3,499',
+      originalPrice: '₹4,999',
+      students: '1.5K+',
+      rating: 4.8,
+      duration: '10 weeks',
+      level: 'Intermediate',
+      skills: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'GraphQL']
+    },
+    {
+      title: 'Backend Development',
+      description: 'Master backend development with Node.js, Express, and databases',
+      price: '₹3,499',
+      students: '1.2K+',
+      rating: 4.7,
+      duration: '10 weeks',
+      level: 'Intermediate',
+      skills: ['Node.js', 'Express', 'MongoDB', 'PostgreSQL', 'REST APIs']
+    },
+    {
+      title: 'DevOps & Cloud',
+      description: 'Learn to deploy and scale applications with Docker, Kubernetes, and AWS',
+      price: '₹4,999',
+      originalPrice: '₹6,999',
+      students: '900+',
+      rating: 4.9,
+      duration: '8 weeks',
+      level: 'Advanced',
+      skills: ['Docker', 'Kubernetes', 'AWS', 'CI/CD', 'Terraform']
     }
   ];
 
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const handleNewsletterSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newsletterEmail || !newsletterEmail.match(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)) {
+      toast({
+        title: 'Invalid Email',
+        description: 'Please enter a valid email address.',
+        variant: 'destructive',
+      });
+      return;
+    }
+    toast({
+      title: 'Subscribed!',
+      description: 'You have successfully subscribed to the newsletter.',
+    });
+    setNewsletterEmail('');
+  };
+
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden">
+    <div className="min-h-screen bg-background relative overflow-hidden dark:bg-background/95">
       <InteractiveCursor />
       <ParticleBackground />
       <div className="absolute inset-0 bg-gradient-mesh opacity-30" />
@@ -158,12 +220,15 @@ const Index = () => {
             <ScrollAnimationWrapper animation="scaleIn" delay={800}>
               <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
                 <MagneticButton magnetStrength={0.2}>
-                  <NavLink to="/products">
-                    <Button size="lg" className="text-lg px-8 py-6 bg-gradient-primary shadow-dramatic hover:shadow-glow transition-all duration-500 group relative overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                      <Rocket className="mr-2 h-5 w-5 group-hover:animate-bounce" />
+                  <NavLink to="/products" className="group">
+                    <Button 
+                      size="lg" 
+                      variant="no-hover"
+                      className="text-lg px-8 py-6"
+                    >
+                      <Rocket className="mr-2 h-5 w-5" />
                       Start Learning
-                      <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight className="ml-2 h-5 w-5" />
                     </Button>
                   </NavLink>
                 </MagneticButton>
@@ -278,59 +343,21 @@ const Index = () => {
               Featured <span className="bg-gradient-primary bg-clip-text text-transparent">Courses</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Our most popular courses designed to get you job-ready fast.
+              Comprehensive programs designed to take you from beginner to job-ready
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {courses.map((course, index) => (
-              <Card key={index} className="group hover:shadow-glow transition-all duration-300 bg-gradient-card border-border/50">
-                <CardHeader>
-                  <div className="flex items-center justify-between mb-2">
-                    {course.popular && (
-                      <Badge className="bg-brand-accent text-black">Most Popular</Badge>
-                    )}
-                    <div className="flex items-center gap-1 ml-auto">
-                      <Star className="h-4 w-4 fill-brand-accent text-brand-accent" />
-                      <span className="text-sm font-medium">{course.rating}</span>
-                    </div>
-                  </div>
-                  <CardTitle className="group-hover:text-brand-primary transition-colors">
-                    {course.title}
-                  </CardTitle>
-                  <CardDescription>{course.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                      <Users className="h-4 w-4" />
-                      <span>{course.students} students</span>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="text-xl font-bold text-brand-primary">{course.price}</span>
-                      {course.originalPrice && (
-                        <span className="text-sm text-muted-foreground line-through">
-                          {course.originalPrice}
-                        </span>
-                      )}
-                    </div>
-                    <Button size="sm" variant="outline" className="group/btn">
-                      Learn More
-                      <ArrowRight className="h-4 w-4 ml-1 group-hover/btn:translate-x-1 transition-transform" />
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
+              <EnhancedCourseCard key={index} course={course} />
             ))}
           </div>
           
           <div className="text-center">
             <NavLink to="/products">
-              <Button size="lg" variant="outline" className="px-8">
+              <Button size="lg" variant="outline" className="group">
                 View All Courses
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </NavLink>
           </div>
@@ -391,17 +418,19 @@ const Index = () => {
               Join 25K+ developers already subscribed.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto mb-8">
+            <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto mb-8" onSubmit={handleNewsletterSubscribe}>
               <Input 
                 type="email" 
                 placeholder="Enter your email"
                 className="flex-1"
+                value={newsletterEmail}
+                onChange={e => setNewsletterEmail(e.target.value)}
               />
-              <Button className="bg-gradient-primary">
+              <Button variant="no-hover" type="submit">
                 Subscribe
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-            </div>
+            </form>
             
             <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
               <CheckCircle className="h-4 w-4 text-brand-primary" />
@@ -481,10 +510,10 @@ const Index = () => {
           
           <div className="border-t border-border pt-8 flex flex-col sm:flex-row justify-between items-center">
             <p className="text-muted-foreground text-sm">
-              © 2024 Harkirat Singh. All rights reserved.
+              2024 Harkirat Singh. All rights reserved.
             </p>
             <p className="text-muted-foreground text-sm">
-              Made with ❤️ for the developer community
+              Made with for the developer community
             </p>
           </div>
         </div>
